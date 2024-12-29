@@ -1,6 +1,8 @@
 package com.gridnine.testing;
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -8,7 +10,7 @@ public class Main {
         FilterExecutor executor = new FilterExecutor();
         List <Flight> flightList = FlightBuilder.createFlights();
         System.out.println("Отфильтрованные полёты, кроме тех, дата вылета которых раньше текущей даты: ");
-        printAllTheFlightsFromList(executor.executeAllFilters(List.of(new DepartureBeforeCurrentTimeFilter()),flightList));
+        printAllTheFlightsFromList(executor.executeAllFilters(List.of(new DepartureBeforeCurrentTimeFilter(LocalDateTime.now())),flightList));
         System.out.println("Отфильтрованные полёты, кроме тех, сегменты которых содержат дату прилета раньше даты вылета: ");
         printAllTheFlightsFromList(executor.executeAllFilters(List.of(new DepartureBeforeArrivalFilter()),flightList));
         System.out.println("Отфильтрованные полёты, кроме тех, сегменты которых в сумме приводят к времени на земле более 2х часов : ");
@@ -23,12 +25,12 @@ public class Main {
     Для тестирования раскомментировать код ниже.
     */
 
-//        List <FlightFilter> filters = new ArrayList<>();
-//        filters.add(new DepartureBeforeCurrentTimeFilter());
-//        filters.add(new DepartureBeforeArrivalFilter());
-//        filters.add(new TwoHoursOnTheGroundFilter());
-//        System.out.println("Список полётов отфильтрованный по трём имеющимся фильтрам: ");
-//        printAllTheFlightsFromList(executor.executeAllFilters(filters,flightList));
+        List <FlightFilter> filters = new ArrayList<>();
+        filters.add(new DepartureBeforeCurrentTimeFilter(LocalDateTime.now()));
+        filters.add(new DepartureBeforeArrivalFilter());
+        filters.add(new TwoHoursOnTheGroundFilter());
+        System.out.println("Список полётов отфильтрованный по трём имеющимся фильтрам: ");
+        printAllTheFlightsFromList(executor.executeAllFilters(filters,flightList));
 
     }
 

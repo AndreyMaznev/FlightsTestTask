@@ -15,6 +15,9 @@ public class TwoHoursOnTheGroundFilter implements FlightFilter {
     public List<Flight> execute (List<Flight> flightList) {
         if (flightList == null || flightList.isEmpty()) return Collections.emptyList();
         List <Flight> resultList = new ArrayList<>();
+        flightList.stream()
+                .filter(flight -> flight.getSegments().size() <= 1)
+                .forEach(resultList::add);
                 flightList.stream()
                 .filter(flight -> flight.getSegments().size() > 1)
                 .filter(flight -> {
@@ -25,9 +28,6 @@ public class TwoHoursOnTheGroundFilter implements FlightFilter {
                             return hoursOnTheGround <= 2;
                         })
                         .forEach(resultList::add);
-        flightList.stream()
-                .filter(flight -> flight.getSegments().size() <= 1)
-                .forEach(resultList::add);
         return resultList;
     }
 }

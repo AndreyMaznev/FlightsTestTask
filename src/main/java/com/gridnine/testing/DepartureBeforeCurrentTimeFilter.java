@@ -10,8 +10,8 @@ public class DepartureBeforeCurrentTimeFilter implements FlightFilter {
 
     private LocalDateTime currentTime;
 
-    public DepartureBeforeCurrentTimeFilter() {
-        this.currentTime = LocalDateTime.now();
+    public DepartureBeforeCurrentTimeFilter(LocalDateTime currentTime) {
+        this.currentTime = currentTime;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class DepartureBeforeCurrentTimeFilter implements FlightFilter {
         if (flightList == null || flightList.isEmpty()) return Collections.emptyList();
         return flightList.stream()
                 .filter(f -> f.getSegments().stream()
-                        .anyMatch(segment -> segment.getDepartureDate().isAfter(currentTime)))
+                        .allMatch(segment -> segment.getDepartureDate().isAfter(currentTime)))
                 .collect(toList());
     }
 }

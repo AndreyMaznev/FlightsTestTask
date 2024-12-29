@@ -25,12 +25,12 @@ public class Main {
     Для тестирования раскомментировать код ниже.
     */
 
-        List <FlightFilter> filters = new ArrayList<>();
-        filters.add(new DepartureBeforeCurrentTimeFilter(LocalDateTime.now()));
-        filters.add(new DepartureBeforeArrivalFilter());
-        filters.add(new TwoHoursOnTheGroundFilter());
-        System.out.println("Список полётов отфильтрованный по трём имеющимся фильтрам: ");
-        printAllTheFlightsFromList(executor.executeAllFilters(filters,flightList));
+//        List <FlightFilter> filters = new ArrayList<>();
+//        filters.add(new DepartureBeforeCurrentTimeFilter(LocalDateTime.now()));
+//        filters.add(new DepartureBeforeArrivalFilter());
+//        filters.add(new TwoHoursOnTheGroundFilter());
+//        System.out.println("Список полётов отфильтрованный по трём имеющимся фильтрам: ");
+//        printAllTheFlightsFromList(executor.executeAllFilters(filters,flightList));
 
     }
 

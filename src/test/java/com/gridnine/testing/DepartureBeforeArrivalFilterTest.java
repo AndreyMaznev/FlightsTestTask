@@ -36,8 +36,7 @@ class DepartureBeforeArrivalFilterTest {
 
     @Test
     void executeReturnsEmptyListIfInputListIsNullOrEmpty() {
-        List <Flight> nullList = null;
-        assertEquals(filter.execute(nullList), List.of());
+        assertEquals(filter.execute(null), List.of());
         List <Flight> emptyList = new ArrayList<>();
         assertEquals(filter.execute(emptyList), List.of());
     }

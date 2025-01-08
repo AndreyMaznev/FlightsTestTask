@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,9 +41,8 @@ class TwoHoursOnTheGroundFilterTest {
 
     @Test
     void executeReturnsEmptyListIfInputListIsNullOrEmpty() {
-        assertEquals(filter.execute(null), List.of());
-        List <Flight> emptyList = new ArrayList<>();
-        assertEquals(filter.execute(emptyList), List.of());
+        assertEquals(filter.execute(null), Collections.emptyList());
+        assertEquals(filter.execute(Collections.emptyList()), Collections.emptyList());
     }
 
 }

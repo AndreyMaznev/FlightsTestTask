@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,13 +46,28 @@ class FilterExecutorTest {
             beforeArrivalFilterTest,
             twoHoursOnTheGroundFilterTest));
 
-    List <Flight> expectedFlightList = new ArrayList<>(List.of(testFlightFive));
+    List <Flight> listToFilter = new ArrayList<>(List.of(testFlightOne, testFlightTwo, testFlightThree,
+            testFlightFour, testFlightFive));
+    List <Flight> expectedFilteredFlightList = new ArrayList<>(List.of(testFlightFive));
+    List <Flight> expectedOriginalFlightList = new ArrayList<>(List.of(testFlightOne, testFlightTwo, testFlightThree,
+            testFlightFour, testFlightFive));
 
     @Test
-    void executeAllFilters () {
+    void executeAllFiltersReturnsCorrectFlightsList () {
         assertEquals(
-                filterExecutor.executeAllFilters(flightFilterList,List.of(testFlightOne,testFlightTwo,testFlightThree,testFlightFour,testFlightFive)),
-                expectedFlightList);
+                filterExecutor.executeAllFilters(flightFilterList, listToFilter),
+                expectedFilteredFlightList);
     }
 
+    @Test
+    void executeAllFiltersOnEmptyOrNullListReturnsEmptyList() {
+        assertEquals(filterExecutor.executeAllFilters(flightFilterList, null), Collections.emptyList());
+        assertEquals(filterExecutor.executeAllFilters(flightFilterList, Collections.emptyList()), Collections.emptyList());
+    }
+
+
+    @Test
+    void executeEmptyFilterListReturnsFullOriginalList() {
+        assertEquals(expectedOriginalFlightList, filterExecutor.executeAllFilters(Collections.emptyList(), listToFilter));
+    }
 }

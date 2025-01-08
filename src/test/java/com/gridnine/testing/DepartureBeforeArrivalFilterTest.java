@@ -29,9 +29,19 @@ class DepartureBeforeArrivalFilterTest {
     List <Flight> expectedFilteredFlightsList  = new ArrayList<>(List.of(testFlightOne));
 
     @Test
-    void execute() {
+    void executeReturnsRightFlightsList() {
         assertEquals (filter.execute(Arrays.asList(testFlightOne,testFlightTwo)), expectedFilteredFlightsList);
         assertEquals (filter.execute(Arrays.asList(testFlightOne,testFlightTwo,testFlightThree)), expectedFilteredFlightsList);
     }
+
+    @Test
+    void executeReturnsEmptyListIfInputListIsNullOrEmpty() {
+        List <Flight> nullList = null;
+        assertEquals(filter.execute(nullList), List.of());
+        List <Flight> emptyList = new ArrayList<>();
+        assertEquals(filter.execute(emptyList), List.of());
+    }
+
+
 
 }
